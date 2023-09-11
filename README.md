@@ -1,2 +1,2 @@
 # Projetos
-Repositório para armazenamento de projetos e prática de estudos.
+Repositório para armazenamento de projetos práticos.
