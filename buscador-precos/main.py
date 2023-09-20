@@ -17,36 +17,38 @@ sites = {'Amazon': {'url': 'https://www.amazon.com.br/', 'elemento_pesquisa': '/
          'Mercado Livre': {'url': 'https://www.mercadolivre.com.br/', 'elemento_pesquisa': '//*[@id="cb1-edit"]'}
          }
 
-print(list(sites.keys()))
-print(sites['Amazon'])
+def acesso_pagina(sites, indx):
+   driver.get(sites['url'][indx])
 
-# def acesso_pagina(sites, indx):
-#    driver.get(sites['url'][indx])
+def pesquisa_produto(sites, indx, produto):
+   # Clica na barra 'pesquisa' e digita o produto.
+   driver.find_element(By.XPATH, sites['elemento_pesquisa'][indx]).send_keys(produto)
 
-# def pesquisa_produto(sites, indx, produto):
-#    # Clica na barra 'pesquisa' e digita o produto.
-#    driver.find_element(By.XPATH, sites['elemento_pesquisa'][indx]).send_keys(produto)
+   # Aperta botão 'ENTER'.
+   ActionChains(driver).send_keys(Keys.ENTER).perform()
 
-#    # Aperta botão 'ENTER'.
-#    ActionChains(driver).send_keys(Keys.ENTER).perform()
+# Definindo parâmetros.
+produto = input('Produto: ').lower()
 
-# # Definindo parâmetros.
-# produto = input('Produto: ').lower()
+## Firefox
+options = webdriver.FirefoxOptions()
+driver = webdriver.Firefox(options=options)
 
-# ## Firefox
-# options = webdriver.FirefoxOptions()
-# driver = webdriver.Firefox(options=options)
+for indx in range(0, len(sites['site'])): # NOTE: Talvez um 'WHILE'?
 
-# for indx in range(0, len(sites['site'])): # NOTE: Talvez um 'WHILE'?
+   # Acessando página.
+   acesso_pagina(sites, indx)
 
-#    # Acessando página.
-#    acesso_pagina(sites, indx)
+   # Pesquisando produto.
+   pesquisa_produto(sites, indx, produto)
 
-#    # Pesquisando produto.
-#    pesquisa_produto(sites, indx, produto)
+   # Acessa próxima página (IF TRUE).
+   # proxima_pagina()
 
-# # NOTE: Extrair dados com BeautifulSoup.
+   # NOTE: Extrair dados com BeautifulSoup.
+   # Extração dos dados.
+   # extrat_dados()
 
-# sleep(5)
+sleep(5)
 
-# driver.quit()
+driver.quit()
